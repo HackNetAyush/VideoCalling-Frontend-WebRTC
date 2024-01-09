@@ -1,4 +1,4 @@
-const signalingServerUrl = 'https://signaling-server-um62.onrender.com/';
+const signalingServerUrl = 'http://localhost:3000';
 const socket = io.connect(signalingServerUrl);
 let pc; //PeerConnection
 var localVideo = document.getElementById("localVideo");
@@ -16,10 +16,11 @@ socket.on('connect', () => {
     socket.on("availableRooms", (roomsList) => {
       console.log(roomsList)
       if (roomsList.length > 0) {
-        location.hash = roomsList[0]
+        const randomIndex = Math.floor(Math.random() * roomsList.length);
+        location.hash = roomsList[randomIndex]
         var roomHash = location.hash.substring(1);
         socket.emit('joinRoom', roomHash);
-        console.log("Location Hash: ", location.hash, "Room List Index Elem: ", roomsList[0])
+        console.log("Location Hash: ", location.hash, "Room List Index Elem: ", roomHash)
         document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
         startWebRTC(true)
 
@@ -53,10 +54,42 @@ socket.on("roomFull", (room) => {
 })
 
 
+function remove(arr, elementToRemove) {
+  const indexToRemove = arr.indexOf(elementToRemove);
+
+  if (indexToRemove !== -1) {
+    arr.splice(indexToRemove, 1);
+    // console.log(`Removed element ${elementToRemove} from the array:`, arr);
+  } else {
+    console.log(`Element ${elementToRemove} not found in the array.`);
+  }
+}
+
+
+
+
+var memberCount = 1;
+
+// socket.on("availableRooms", (roomsList) => {
+//   var roomHash = location.hash.substring(1);
+//   remove(roomsList, roomHash)
+//   console.log(roomsList);
+// });
+
+// function getMemberCount(memberCount) {
+//   if (memberCount === 1) {
+//     socket.emit("checkAvailableRooms");
+//     console.log("Only one member!");
+//   }
+// }
+
+// setInterval(()=>{getMemberCount(memberCount)}, 4000);
+
 
 socket.on("lastConnected",()=>{
   // console.log("Last Connected User!")
   console.log("Partner Joined!")
+  memberCount = memberCount + 1;
   startWebRTC(true)
   // init()
   var roomHash = location.hash.substring(1);
@@ -76,6 +109,8 @@ socket.on('disconnect', () => {
 
 socket.on('userDisconnected', (userId) => {
   console.log(`User ${userId} disconnected`);
+  memberCount = memberCount - 1;
+  window.location.replace("./")
 });
 
 // From Legacy script, their room = our socket
