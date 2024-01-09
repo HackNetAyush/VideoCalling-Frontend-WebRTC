@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>VidCall @ ChitChat</title>
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+
+
+</head>
+
+<body>
+  <div class="root">
+
+    <div class="back">
+      <video id="remoteVideo" poster="https://wallpapercave.com/wp/wp13342071.jpg" class="video_back remoteVideoo"
+        autoplay></video>
+      <video style="display: none;" poster="https://wallpapercave.com/wp/wp12986405.jpg" id="localVideo"
+        class="video_back localVideoo" autoplay muted></video>
+    </div>
+
+    <div class="foreground">
+
+      <div class="overlay_top">
+        <div id="hash_code" class="code"></div>
+        <div class="options">
+
+          <div class="option" id="resize_btn">
+            <ion-icon class="icon" name="eye"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="overlay_video_front">
+
+        <div class="vid_front_div" id="lv2_div">
+          <video id="localVideo2" poster="https://wallpapercave.com/wp/wp12986405.jpg" class="video_front localVideo2"
+            autoplay muted></video>
+        </div>
+
+        <div class="vid_front_div" style="display: none;" id="rv2_div">
+          <video id="remoteVideo2" poster="https://wallpapercave.com/wp/wp13342071.jpg" class="video_front remoteVideo2"
+            autoplay></video>
+        </div>
+
+      </div>
+
+
+      <div class="overlay_bottom">
+        <div id="mic" class="main_btn">
+          <ion-icon id="mic_icon" name="mic"></ion-icon>
+        </div>
+        <div id="endcall" class="main_btn endcall">
+          <ion-icon id="end_icon" name="call"></ion-icon>
+        </div>
+        <div id="cam" class="main_btn">
+          <ion-icon id="cam_icon" name="videocam"></ion-icon>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <script src="myScript3.js"></script>
+  <script src="toggle.js"></script>
+</body>
+
+</html>
