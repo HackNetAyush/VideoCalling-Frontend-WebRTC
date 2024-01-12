@@ -101,8 +101,20 @@ html, body {
   background: -webkit-linear-gradient(to right, #7f00ff, #e100ff);
   background: linear-gradient(to right, #7f00ff, #e100ff);
   -webkit-tap-highlight-color: transparent;
+  transition: all 0.3s ease-in-out;
 }
 
+.option:active{
+  transform: scale(0.95);
+}
+
+#swap{
+  background: #7f00ff;
+  background: -webkit-linear-gradient(to right, #7f00ff, #e100ff);
+  background: linear-gradient(to right, #7f00ff, #e100ff);
+  -webkit-tap-highlight-color: transparent;
+  color: white;
+}
 
 
 .overlay_bottom{
@@ -185,6 +197,11 @@ html, body {
   cursor: pointer;
   margin: 20px;
   -webkit-tap-highlight-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.main_btn:active {
+  transform: scale(0.95);
 }
 
 .endcall{

@@ -7,10 +7,17 @@ localVideo.style.transform = "scaleX(-1)";
 localVideo2.style.transform = "scaleX(-1)";
 var remoteVideo = document.getElementById("remoteVideo")
 var remoteVideo2 = document.getElementById("remoteVideo2")
+var stat = document.getElementById("hash_code")
+
+stat.innerText = "Connecting to server"
+
 
 
 socket.on('connect', () => {
   console.log('Connected to signaling server');
+  stat.innerText = "Connected to server"
+
+
   if (!location.hash) {
     socket.emit("checkAvailableRooms")
     socket.on("availableRooms", (roomsList) => {
@@ -21,14 +28,14 @@ socket.on('connect', () => {
         var roomHash = location.hash.substring(1);
         socket.emit('joinRoom', roomHash);
         console.log("Location Hash: ", location.hash, "Room List Index Elem: ", roomHash)
-        document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
+        // document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
         startWebRTC(true)
 
       } else {
         location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
         var roomHash = location.hash.substring(1);
         socket.emit('joinRoom', roomHash);
-        document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
+        // document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
         startWebRTC(true)
 
       }
@@ -38,7 +45,7 @@ socket.on('connect', () => {
     startWebRTC(true)
     var roomHash = location.hash.substring(1);
     socket.emit("joinRoom", roomHash)
-    document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
+    // document.getElementById("hash_code").innerHTML = "Code: #" + location.hash.slice(1);
   }
 
 });
@@ -94,6 +101,8 @@ socket.on("lastConnected",()=>{
   // init()
   var roomHash = location.hash.substring(1);
   socket.emit("lastUserConnected",roomHash)
+  stat.innerText = "You are now talking to a stranger!"
+
 })
 
 
@@ -105,10 +114,12 @@ const configuration = {
 
 socket.on('disconnect', () => {
   console.log('Connection to signaling server closed');
+  stat.innerText = "Server disconnected :("
 });
 
 socket.on('userDisconnected', (userId) => {
   console.log(`User ${userId} disconnected`);
+  stat.innerText = "User disconnected";
   memberCount = memberCount - 1;
   window.location.replace("./")
 });
@@ -260,6 +271,11 @@ resize_btn.onclick = function(){
 
 
 
-document.getElementById("endcall").onclick = function(){
-  window.close();
+// document.getElementById("endcall").onclick = function(){
+//   window.close();
+// }
+
+
+document.getElementById("swap").onclick = function(){
+  window.location.replace("./");
 }
