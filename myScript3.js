@@ -1,4 +1,4 @@
-const signalingServerUrl = 'http://192.168.1.10:3000';
+const signalingServerUrl = 'https://signaling-server-um62.onrender.com';
 const socket = io.connect(signalingServerUrl);
 let pc; //PeerConnection
 var localVideo = document.getElementById("localVideo");
