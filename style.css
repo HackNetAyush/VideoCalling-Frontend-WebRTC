@@ -149,6 +149,7 @@ html, body {
   height: 25vw;
   max-height: 150px;
 /*   border-radius: 50%; */
+  border: solid 2px white;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   

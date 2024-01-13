@@ -1,4 +1,4 @@
-const signalingServerUrl = 'https://signaling-server-um62.onrender.com';
+const signalingServerUrl = 'http://192.168.1.10:3000';
 const socket = io.connect(signalingServerUrl);
 let pc; //PeerConnection
 var localVideo = document.getElementById("localVideo");
@@ -16,6 +16,7 @@ stat.innerText = "Connecting to server"
 socket.on('connect', () => {
   console.log('Connected to signaling server');
   stat.innerText = "Connected to server"
+  setTimeout(()=>{stat.innerText = "Find or wait for someone to join"},2000)
 
 
   if (!location.hash) {
