@@ -16,7 +16,7 @@ stat.innerText = "Connecting to server"
 socket.on('connect', () => {
   console.log('Connected to signaling server');
   stat.innerText = "Connected to server"
-  setTimeout(()=>{stat.innerText = "Find or wait for someone to join"},2000)
+  // setTimeout(()=>{stat.innerText = "Find or wait for someone to join"},2000)
 
 
   if (!location.hash) {
