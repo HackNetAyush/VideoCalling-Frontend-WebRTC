@@ -1,5 +1,5 @@
-//const signalingServerUrl = 'https://signaling-server-um62.onrender.com';
-const signalingServerUrl = 'https://signaling-server-new.onrender.com';
+const signalingServerUrl = 'https://signaling-server-um62.onrender.com';
+//const signalingServerUrl = 'https://signaling-server-new.onrender.com';
 const socket = io.connect(signalingServerUrl);
 let pc; //PeerConnection
 var localVideo = document.getElementById("localVideo");
